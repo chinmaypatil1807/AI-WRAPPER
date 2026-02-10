@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Prompt Improver
+# AI Wrapper — Prompt Improver
 
 Turn a bad or vague prompt into a better one. Paste your prompt, get an **improved version** plus a short **explanation** of what changed.
 
@@ -16,13 +15,20 @@ Turn a bad or vague prompt into a better one. Paste your prompt, get an **improv
    - Copy `.env.local.example` to `.env.local`
    - Set `OPENAI_API_KEY` to your [OpenAI API key](https://platform.openai.com/api-keys)
 
-3. Run the dev server:
+3. **(Optional)** Limit usage on Vercel so you don’t run out of tokens:
+   - Create a free [Upstash Redis](https://console.upstash.com/) database
+   - In `.env.local` (and in Vercel → Project → Settings → Environment Variables), set:
+     - `UPSTASH_REDIS_REST_URL`
+     - `UPSTASH_REDIS_REST_TOKEN`
+   - When both are set, the API is limited to **10 requests per 60 seconds per IP**.
+
+4. Run the dev server:
 
    ```bash
    npm run dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000).
+5. Open [http://localhost:3000](http://localhost:3000).
 
 ## Build
 
@@ -31,12 +37,13 @@ npm run build
 npm start
 ```
 
-## MVP
+## Deploy (Vercel)
 
-- **Input**: Your prompt (textarea).
-- **Output**: Improved prompt (copyable) and explanation.
-- Improvement is done by an LLM (OpenAI `gpt-4o-mini`) via the `/api/improve` route; the API key stays server-side in `.env.local`.
-=======
-# AI_WRAPPER
-This project improves your input prompt like a prompt engineer
->>>>>>> f3d4ec958e1b69669bdee89f7bbaa51ba0eb98c1
+- Push to GitHub and [import the repo on Vercel](https://vercel.com/new).
+- Set `OPENAI_API_KEY` in Vercel environment variables.
+- To enable rate limiting, also set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` in Vercel.
+
+## Rate limiting
+
+- If Upstash env vars are **not** set: no rate limit (useful for local dev).
+- If they **are** set: **10 requests per 60 seconds per IP** (sliding window). Users who exceed this get a “Too many requests” message and can retry after a minute.
