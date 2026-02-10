@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Prompt Improver
 
 Turn a bad or vague prompt into a better one. Paste your prompt, get an **improved version** plus a short **explanation** of what changed.
@@ -35,3 +36,7 @@ npm start
 - **Input**: Your prompt (textarea).
 - **Output**: Improved prompt (copyable) and explanation.
 - Improvement is done by an LLM (OpenAI `gpt-4o-mini`) via the `/api/improve` route; the API key stays server-side in `.env.local`.
+=======
+# AI_WRAPPER
+This project improves your input prompt like a prompt engineer
+>>>>>>> f3d4ec958e1b69669bdee89f7bbaa51ba0eb98c1
